@@ -13,6 +13,12 @@ npm start
 
 The content for this microsite has been written in [jade](http://jade-lang.com) and [less](http://lesscss.org). Layout and partials can be found under `views`. 
 
+To compile components, run
+```
+npm run-script components
+```
+This generates public/javascripts/components.js
+
 To generate the site, run 
 ```
 npm run-script pages
