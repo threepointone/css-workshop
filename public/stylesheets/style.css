@@ -30,9 +30,6 @@ strong {
 .hero strong {
   color: #999;
 }
-.speaker-pic {
-  text-align: center;
-}
 .speaker-pic img {
   width: 150px;
   height: 150px;
@@ -43,11 +40,16 @@ strong {
   -moz-box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
   box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
   border: 5px solid white;
+  display: block;
+  position: relative;
+  margin: 20px auto;
 }
 .schedule .unit,
 .blurb,
 .hero,
-.speaker {
+.speaker,
+.hasgeek,
+.venue {
   background-color: white;
   padding: 40px;
   margin-bottom: 40px;
