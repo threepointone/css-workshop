@@ -34,6 +34,9 @@ strong {
 .blurb,
 .hero,
 .speaker {
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
   background-color: white;
   -webkit-box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.1);
   -moz-box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.1);
@@ -41,6 +44,9 @@ strong {
   border: 1px solid #eee;
   padding: 40px;
   margin-bottom: 40px;
+}
+.schedule .title {
+  text-align: center;
 }
 .schedule .unit h3 {
   margin-bottom: 16px;
