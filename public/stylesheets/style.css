@@ -27,6 +27,17 @@ strong {
   width: 960px;
   margin: 20px auto;
 }
+.schedule .unit,
+.blurb,
+.hero,
+.speaker,
+.hasgeek,
+.venue,
+.register {
+  background-color: white;
+  padding: 40px;
+  margin-bottom: 40px;
+}
 .hero strong {
   color: #777;
 }
@@ -43,17 +54,6 @@ strong {
   display: block;
   position: relative;
   margin: 20px auto;
-}
-.schedule .unit,
-.blurb,
-.hero,
-.speaker,
-.hasgeek,
-.venue,
-.register {
-  background-color: white;
-  padding: 40px;
-  margin-bottom: 40px;
 }
 .schedule .title {
   text-align: center;
