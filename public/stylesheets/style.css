@@ -8,7 +8,7 @@ body {
   font-family: "PT Serif", sans-serif;
   font-size: 16px;
   line-height: 24px;
-  background-color: #eee;
+  -webkit-font-smoothing: subpixel-antialiased;
 }
 h1,
 h2,
@@ -30,18 +30,25 @@ strong {
 .hero strong {
   color: #999;
 }
+.speaker-pic {
+  text-align: center;
+}
+.speaker-pic img {
+  width: 150px;
+  height: 150px;
+  -webkit-border-radius: 90px;
+  -moz-border-radius: 90px;
+  border-radius: 90px;
+  -webkit-box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
+  -moz-box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
+  border: 5px solid white;
+}
 .schedule .unit,
 .blurb,
 .hero,
 .speaker {
   background-color: white;
-  -webkit-box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.1);
-  -moz-box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.1);
-  box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.1);
-  border: 1px solid #eee;
-  -webkit-border-radius: 5px;
-  -moz-border-radius: 5px;
-  border-radius: 5px;
   padding: 40px;
   margin-bottom: 40px;
 }
