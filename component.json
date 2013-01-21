@@ -1,0 +1,12 @@
+{
+    "name": "cssforthesoul",
+    "repo": "threepointone/cssforthesoul",
+    "description": "components for the microsite",
+    "version": "0.0.1",
+    "keywords": [],
+    "dependencies": {
+        "component/tween": "*"
+    },
+    "main":"public/javascripts/index.js",
+    "scripts":["public/javascripts/index.js"]
+}

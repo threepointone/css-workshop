@@ -3,11 +3,13 @@
   "version": "0.0.1",
   "scripts": {
     "start": "node app",
+    "components":"./node_modules/.bin/component install && ./node_modules/.bin/component build --out public/javascripts --name components",
     "pages":"./node_modules/.bin/jade views/index.jade --pretty --out public"
   },
   "dependencies": {
     "express": "3.0.6",
     "jade": "*",
-    "less-middleware": "*"
+    "less-middleware": "*",
+    "component": "*"
   }
 }
