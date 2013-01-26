@@ -9,9 +9,13 @@
   </head>
   <body>
     <div class="container">
-      <div class="hero">   
+      <div class="hero">
+        <div class="fb-1"><img src="images/arrow-1.png" style="display:none" class="arrow"><img src="/images/needs-logo.png" style="display:none" class="needs-logo"></div>
+        <div class="fb-2"><img src="images/arrow-2.png" style="display:none" class="arrow"><img src="images/not-enough-pop.png" style="display:none" class="not-enough-pop"></div>
         <div class="by">
-          <h3>HasGeek presents</h3>
+          <h3> <img src="images/hasgeek.png" class="hasgeek-logo">
+            <div class="txt">Hasgeek presents</div>
+          </h3>
         </div>
         <div class="title">
           <h1>CSS for the soul</h1><strong>An intensive 2 day workshop on the language, the tools and ecosystem, and best practices.</strong>
@@ -27,7 +31,15 @@
           tools and frameworks, and how to develop professional web pages.
         </p>
       </div>
-      <div class="speaker-pic"><img src="images/circle-pi.png" alt="Sunil Pai" title="Sunil Pai"></div>
+      <div class="speaker-pic"><img src="images/avatar.png" alt="Sunil Pai" title="Sunil Pai">
+        <div class="fb-3">
+          <div style="display:none" class="blue comment"><span class="user">jeff</span>too pretentious</div>
+          <div style="display:none" class="green comment"> <span class="user">britta</span>NOT ENOUGH WEB 2.0</div>
+          <div style="display:none" class="green comment"> <span class="user">britta</span>rounder</div>
+          <div style="display:none" class="green comment"> <span class="user">britta</span>ROUNDER</div>
+          <div style="display:none" class="blue comment"> <span class="user">jeff</span>dammit britta</div>
+        </div>
+      </div>
       <div class="speaker">
         <p>
           <strong>Sunil Pai</strong> has been a professional front end developer for 8 years. 
@@ -44,7 +56,7 @@
         <div class="unit intro">
           <h3>Introductions</h3>
           <ul>
-            <li>Setup laptops with environnments and tools.</li>
+            <li>Setup laptops with environments and tools.</li>
             <li><strong>From mockup to code</strong>: How to convert a design to a web page.</li>
             <li><strong>Project kickoff</strong></li>
           </ul>
@@ -74,6 +86,12 @@
             <li>How to compile, optimize, and deploy code to a server. </li>
             <li><strong>Bonus</strong>: How to work with CDNs.</li>
           </ul>
+          <div class="fb-4">
+            <div class="post-it">needs to be 3d <br>j</div>
+            <div class="post-it">no, not like that<br>j</div>
+            <div class="post-it">not like that either<br>j</div>
+            <div class="post-it">"The 3 Ds", dammit. <br>j</div>
+          </div>
         </div>
         <h2 class="title">Day Two</h2>
         <div class="unit animations">
@@ -88,6 +106,7 @@
           </ul>
         </div>
         <div class="unit performance">
+          <div class="bar-graph"></div>
           <h3>Performance</h3>
           <ul>
             <li>The basics of writing performant crossbrowser CSS.</li>
@@ -140,5 +159,7 @@
       </div>
     </div>
     <script src="javascripts/components.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+    <script>var ws = require('cssforthesoul');</script>
   </body>
 </html>

@@ -1,4 +1,5 @@
 @import "elements.less";
+@import "animate.less";
 
 // The micro clearfix http://nicolasgallagher.com/micro-clearfix-hack/
 .clearfix() {
@@ -41,7 +42,7 @@ strong{
 
 .schedule .unit, .blurb, .hero, .speaker, .hasgeek, .venue, .register {    
     
-    background-color: white;
+    // background-color: white;
     // .drop-shadow(2px, 2px, 2px, 0.1);
     
     // border: 1px solid #eee;
@@ -49,26 +50,103 @@ strong{
     
     padding: 40px;    
     margin-bottom: 40px;
+    position: relative;
 }
 
 .hero{
     strong{
         color:#777;
     }
+    h3{
+        overflow: hidden;
+    }
+
+    .title.pop{
+
+        // text-shadow: yellow 1px 1px 3px;
+
+        h1{
+            .transition(0.6s, cubic-bezier(1.000, -0.530, 0.405, 1.425));
+            font-size:72px;
+            color:red; 
+        }
+
+
+
+    }
+
+
+
+    .hasgeek-logo{
+        width:0;
+        height:0;
+        &.needed-logo{
+            .transition(0.4s, linear);
+            width:100px;
+            height:75px;
+        }
+    }
+}
+
+.fb-1, .fb-1 img{
+    position: absolute;
+}
+
+.fb-1 .arrow{
+    top:0px;
+    left:-160px;
+}
+
+.fb-1 .needs-logo{
+    top:70px;
+    left:-180px;
+}
+
+.fb-2, .fb-2 img{
+    position: absolute;    
+}
+
+.fb-2 .arrow{
+    left:220px;
+    top:60px;
+}
+
+.fb-2 .not-enough-pop{
+    left:170px;
+    top:20px;
 }
 
 
-.speaker-pic img
-{
-    width:150px;
-    height:150px;
-    .rounded(90px);
-    .drop-shadow(2px, 2px, 10px, 0.3);
-    border:5px solid white;
+.speaker-pic{
+    position: relative;
+
     
-    display:block;
-    position:relative;
-    margin: 20px auto;
+    img{
+        .transition(0.4s, ease-in);
+        width:150px;
+        height:150px;
+        .rounded(90px);
+        .drop-shadow(2px, 2px, 10px, 0.3);
+        border:5px solid white;
+        
+        display:block;
+        position:relative;
+        margin: 20px auto;
+
+        &.avatar-3d{
+            background-color: red;
+            -webkit-transform: perspective( 600px ) rotateY( 45deg );
+            -moz-transform: perspective( 600px ) rotateY( 45deg );
+            -o-transform: perspective( 600px ) rotateY( 45deg );
+            transform: perspective( 600px ) rotateY( 45deg );
+        }
+    }
+}
+
+.schedule{
+    background-image: url(../images/coffee-stain.jpg);
+    background-repeat: no-repeat;
+    background-position: right 500px;
 }
 
 .schedule .title{
@@ -89,6 +167,53 @@ strong{
     }
 
 }
+
+.fb-3{
+
+    top: 0;
+    right: 40px;
+    background-color: rgba(255, 255, 255, 0.5);
+    padding: 20px;
+    position: absolute;
+    font-family: monospace;
+    font-size: 14px;
+
+    .user{
+        margin-right:5px;
+    }
+    .blue .user{
+        color: #4a6df2;
+    }
+    .green .user{
+        color: #2db548;
+    }
+}
+
+.performance .bar-graph{
+    position: absolute;
+    width:120px;
+    top:50px;
+    left:-120px;
+
+    .bar{
+        height:4px;
+        position: absolute;
+        right: 0;
+        width:0;        
+    }
+}
+
+.ddd h3.threed{
+    font: 60px/80px SilkscreenNormal;
+    line-height: 100px;
+    -webkit-transform: skewY(-26.6deg);
+    -moz-transform: skewY(-26.6deg);
+    -o-transform: skewY(-26.6deg);
+    text-shadow: -1px -1px 0px #999, -2px -2px 0px #888, -3px -3px 0px #777, -4px -4px 0px #666, -5px -5px 0px #555, -5px -5px 0px #444, -5px -5px 0px #333, -5px -5px 5px #222;
+    position: absolute;
+    z-index: 100;
+}
+
 
 .hasgeek-logo{
     width:100px;

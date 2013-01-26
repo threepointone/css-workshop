@@ -4,6 +4,136 @@
     A set of useful LESS mixins
     More info at: http://lesselements.com
   ---------------------------------------------------*/
+/*
+Animate.css - http://daneden.me/animate
+LICENSED UNDER THE  MIT LICENSE (MIT)
+
+Copyright (c) 2012 Dan Eden
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+*/
+.animated {
+  -webkit-animation-fill-mode: both;
+  -moz-animation-fill-mode: both;
+  -ms-animation-fill-mode: both;
+  -o-animation-fill-mode: both;
+  animation-fill-mode: both;
+  -webkit-animation-duration: 1s;
+  -moz-animation-duration: 1s;
+  -ms-animation-duration: 1s;
+  -o-animation-duration: 1s;
+  animation-duration: 1s;
+}
+.animated.hinge {
+  -webkit-animation-duration: 2s;
+  -moz-animation-duration: 2s;
+  -ms-animation-duration: 2s;
+  -o-animation-duration: 2s;
+  animation-duration: 2s;
+}
+/* originally authored by Nick Pettit - https://github.com/nickpettit/glide */
+@-webkit-keyframes wobble {
+  0% {
+    -webkit-transform: translateX(0%);
+  }
+  15% {
+    -webkit-transform: translateX(-25%) rotate(-5deg);
+  }
+  30% {
+    -webkit-transform: translateX(20%) rotate(3deg);
+  }
+  45% {
+    -webkit-transform: translateX(-15%) rotate(-3deg);
+  }
+  60% {
+    -webkit-transform: translateX(10%) rotate(2deg);
+  }
+  75% {
+    -webkit-transform: translateX(-5%) rotate(-1deg);
+  }
+  100% {
+    -webkit-transform: translateX(0%);
+  }
+}
+@-moz-keyframes wobble {
+  0% {
+    -moz-transform: translateX(0%);
+  }
+  15% {
+    -moz-transform: translateX(-25%) rotate(-5deg);
+  }
+  30% {
+    -moz-transform: translateX(20%) rotate(3deg);
+  }
+  45% {
+    -moz-transform: translateX(-15%) rotate(-3deg);
+  }
+  60% {
+    -moz-transform: translateX(10%) rotate(2deg);
+  }
+  75% {
+    -moz-transform: translateX(-5%) rotate(-1deg);
+  }
+  100% {
+    -moz-transform: translateX(0%);
+  }
+}
+@-o-keyframes wobble {
+  0% {
+    -o-transform: translateX(0%);
+  }
+  15% {
+    -o-transform: translateX(-25%) rotate(-5deg);
+  }
+  30% {
+    -o-transform: translateX(20%) rotate(3deg);
+  }
+  45% {
+    -o-transform: translateX(-15%) rotate(-3deg);
+  }
+  60% {
+    -o-transform: translateX(10%) rotate(2deg);
+  }
+  75% {
+    -o-transform: translateX(-5%) rotate(-1deg);
+  }
+  100% {
+    -o-transform: translateX(0%);
+  }
+}
+@keyframes wobble {
+  0% {
+    transform: translateX(0%);
+  }
+  15% {
+    transform: translateX(-25%) rotate(-5deg);
+  }
+  30% {
+    transform: translateX(20%) rotate(3deg);
+  }
+  45% {
+    transform: translateX(-15%) rotate(-3deg);
+  }
+  60% {
+    transform: translateX(10%) rotate(2deg);
+  }
+  75% {
+    transform: translateX(-5%) rotate(-1deg);
+  }
+  100% {
+    transform: translateX(0%);
+  }
+}
+.wobble {
+  -webkit-animation-name: wobble;
+  -moz-animation-name: wobble;
+  -o-animation-name: wobble;
+  animation-name: wobble;
+}
 body {
   font-family: "PT Serif", sans-serif;
   font-size: 16px;
@@ -34,14 +164,68 @@ strong {
 .hasgeek,
 .venue,
 .register {
-  background-color: white;
   padding: 40px;
   margin-bottom: 40px;
+  position: relative;
 }
 .hero strong {
   color: #777;
 }
+.hero h3 {
+  overflow: hidden;
+}
+.hero .title.pop h1 {
+  -webkit-transition: all 0.6s cubic-bezier(1, -0.53, 0.405, 1.425);
+  -moz-transition: all 0.6s cubic-bezier(1, -0.53, 0.405, 1.425);
+  -o-transition: all 0.6s cubic-bezier(1, -0.53, 0.405, 1.425);
+  transition: all 0.6s cubic-bezier(1, -0.53, 0.405, 1.425);
+  font-size: 72px;
+  color: red;
+}
+.hero .hasgeek-logo {
+  width: 0;
+  height: 0;
+}
+.hero .hasgeek-logo.needed-logo {
+  -webkit-transition: all 0.4s linear;
+  -moz-transition: all 0.4s linear;
+  -o-transition: all 0.4s linear;
+  transition: all 0.4s linear;
+  width: 100px;
+  height: 75px;
+}
+.fb-1,
+.fb-1 img {
+  position: absolute;
+}
+.fb-1 .arrow {
+  top: 0px;
+  left: -160px;
+}
+.fb-1 .needs-logo {
+  top: 70px;
+  left: -180px;
+}
+.fb-2,
+.fb-2 img {
+  position: absolute;
+}
+.fb-2 .arrow {
+  left: 220px;
+  top: 60px;
+}
+.fb-2 .not-enough-pop {
+  left: 170px;
+  top: 20px;
+}
+.speaker-pic {
+  position: relative;
+}
 .speaker-pic img {
+  -webkit-transition: all 0.4s ease-in;
+  -moz-transition: all 0.4s ease-in;
+  -o-transition: all 0.4s ease-in;
+  transition: all 0.4s ease-in;
   width: 150px;
   height: 150px;
   -webkit-border-radius: 90px;
@@ -54,6 +238,18 @@ strong {
   display: block;
   position: relative;
   margin: 20px auto;
+}
+.speaker-pic img.avatar-3d {
+  background-color: red;
+  -webkit-transform: perspective(600px) rotateY(45deg);
+  -moz-transform: perspective(600px) rotateY(45deg);
+  -o-transform: perspective(600px) rotateY(45deg);
+  transform: perspective(600px) rotateY(45deg);
+}
+.schedule {
+  background-image: url(../images/coffee-stain.jpg);
+  background-repeat: no-repeat;
+  background-position: right 500px;
 }
 .schedule .title {
   text-align: center;
@@ -68,6 +264,46 @@ strong {
 .schedule .unit p {
   font-size: 16px;
   line-height: 24px;
+}
+.fb-3 {
+  top: 0;
+  right: 40px;
+  background-color: rgba(255, 255, 255, 0.5);
+  padding: 20px;
+  position: absolute;
+  font-family: monospace;
+  font-size: 14px;
+}
+.fb-3 .user {
+  margin-right: 5px;
+}
+.fb-3 .blue .user {
+  color: #4a6df2;
+}
+.fb-3 .green .user {
+  color: #2db548;
+}
+.performance .bar-graph {
+  position: absolute;
+  width: 120px;
+  top: 50px;
+  left: -120px;
+}
+.performance .bar-graph .bar {
+  height: 4px;
+  position: absolute;
+  right: 0;
+  width: 0;
+}
+.ddd h3.threed {
+  font: 60px/80px SilkscreenNormal;
+  line-height: 100px;
+  -webkit-transform: skewY(-26.6deg);
+  -moz-transform: skewY(-26.6deg);
+  -o-transform: skewY(-26.6deg);
+  text-shadow: -1px -1px 0px #999999, -2px -2px 0px #888888, -3px -3px 0px #777777, -4px -4px 0px #666666, -5px -5px 0px #555555, -5px -5px 0px #444444, -5px -5px 0px #333333, -5px -5px 5px #222222;
+  position: absolute;
+  z-index: 100;
 }
 .hasgeek-logo {
   width: 100px;

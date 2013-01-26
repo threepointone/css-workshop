@@ -204,6 +204,122 @@ require.relative = function(parent) {
 
   return localRequire;
 };
+require.register("threepointone-raf/index.js", function(exports, require, module){
+(function(){
+
+    var root = this;
+    module.exports = root.requestAnimationFrame || 
+        root.webkitRequestAnimationFrame || 
+        root.mozRequestAnimationFrame || 
+        root.oRequestAnimationFrame || 
+        root.msRequestAnimationFrame || 
+        fallback;
+
+var prev = new Date().getTime();
+
+function fallback(fn) {
+    var curr = new Date().getTime();
+    var ms = Math.max(0, 16 - (curr - prev));
+    setTimeout(fn, ms);
+    prev = curr;
+}    
+}).call(this);
+
+
+
+});
+require.register("threepointone-animloop/index.js", function(exports, require, module){
+var raf = require('raf'),
+    emitter = require('emitter');
+
+var running = false;
+
+var EVT = 'beforedraw';
+
+var AnimLoop = {
+    start: function() {
+        if(!running){
+            running = true;
+            runloop();
+        }
+    },
+    stop: function(){
+        running = false;
+    }
+};
+
+emitter(AnimLoop);
+
+module.exports = AnimLoop;
+
+function runloop(){
+    if(running){
+        AnimLoop.emit(EVT);
+        raf(runloop);
+    }
+}
+
+
+});
+require.register("manuelstofer-each/index.js", function(exports, require, module){
+"use strict";
+
+var nativeForEach = [].forEach;
+
+// Underscore's each function
+module.exports = function (obj, iterator, context) {
+    if (obj == null) return;
+    if (nativeForEach && obj.forEach === nativeForEach) {
+        obj.forEach(iterator, context);
+    } else if (obj.length === +obj.length) {
+        for (var i = 0, l = obj.length; i < l; i++) {
+            if (iterator.call(context, obj[i], i, obj) === {}) return;
+        }
+    } else {
+        for (var key in obj) {
+            if (Object.prototype.hasOwnProperty.call(obj, key)) {
+                if (iterator.call(context, obj[key], key, obj) === {}) return;
+            }
+        }
+    }
+};
+
+});
+require.register("threepointone-times/index.js", function(exports, require, module){
+var has = Object.prototype.hasOwnProperty;
+var toString = Object.prototype.toString;
+
+var isArray = Array.isArray ||
+function(obj) {
+    return toString.call(obj) == '[object Array]';
+};
+
+module.exports = function(n, fn) {
+    var args = arguments;
+    // combination forloop / map. 
+    // compatible with regular _.times
+    // WARNING - fn is called with (index, value), not the other (regular) way around
+    var times = isArray(n) ? n.length : n;
+    var arr = isArray(n) ? n : [];
+    var ret = [];
+
+    // check if .invoke 
+    if('string' === typeof fn){
+        fn = (function(f){
+            return function(i, el){
+                return el[f].apply(el, Array.prototype.slice.call(args, 2));
+            };
+        }(fn));
+    }
+    // default iterator
+    fn = fn || function(i, el){ return el; };
+
+    for(var i = 0; i < times; i++) {
+        ret.push(fn(i, arr[i]));
+    }
+    return ret;
+};
+});
 require.register("component-emitter/index.js", function(exports, require, module){
 
 /**
@@ -355,367 +471,436 @@ Emitter.prototype.hasListeners = function(event){
 };
 
 });
-require.register("component-ease/index.js", function(exports, require, module){
+require.register("component-bind/index.js", function(exports, require, module){
 
-// easing functions from "Tween.js"
+/**
+ * Slice reference.
+ */
 
-exports.linear = function(n){
-  return n;
-};
+var slice = [].slice;
 
-exports.inQuad = function(n){
-  return n * n;
-};
+/**
+ * Bind `obj` to `fn`.
+ *
+ * @param {Object} obj
+ * @param {Function|String} fn or string
+ * @return {Function}
+ * @api public
+ */
 
-exports.outQuad = function(n){
-  return n * (2 - n);
-};
-
-exports.inOutQuad = function(n){
-  n *= 2;
-  if (n < 1) return 0.5 * n * n;
-  return - 0.5 * (--n * (n - 2) - 1);
-};
-
-exports.inCube = function(n){
-  return n * n * n;
-};
-
-exports.outCube = function(n){
-  return --n * n * n + 1;
-};
-
-exports.inOutCube = function(n){
-  n *= 2;
-  if (n < 1) return 0.5 * n * n * n;
-  return 0.5 * ((n -= 2 ) * n * n + 2);
-};
-
-exports.inQuart = function(n){
-  return n * n * n * n;
-};
-
-exports.outQuart = function(n){
-  return 1 - (--n * n * n * n);
-};
-
-exports.inOutQuart = function(n){
-  n *= 2;
-  if (n < 1) return 0.5 * n * n * n * n;
-  return -0.5 * ((n -= 2) * n * n * n - 2);
-};
-
-exports.inQuint = function(n){
-  return n * n * n * n * n;
-}
-
-exports.outQuint = function(n){
-  return --n * n * n * n * n + 1;
-}
-
-exports.inOutQuint = function(n){
-  n *= 2;
-  if (n < 1) return 0.5 * n * n * n * n * n;
-  return 0.5 * ((n -= 2) * n * n * n * n + 2);
-};
-
-exports.inSine = function(n){
-  return 1 - Math.cos(n * Math.PI / 2 );
-};
-
-exports.outSine = function(n){
-  return Math.sin(n * Math.PI / 2);
-};
-
-exports.inOutSine = function(n){
-  return .5 * (1 - Math.cos(Math.PI * n));
-};
-
-exports.inExpo = function(n){
-  return 0 == n ? 0 : Math.pow(1024, n - 1);
-};
-
-exports.outExpo = function(n){
-  return 1 == n ? n : 1 - Math.pow(2, -10 * n);
-};
-
-exports.inOutExpo = function(n){
-  if (0 == n) return 0;
-  if (1 == n) return 1;
-  if ((n *= 2) < 1) return .5 * Math.pow(1024, n - 1);
-  return .5 * (-Math.pow(2, -10 * (n - 1)) + 2);
-};
-
-exports.inCirc = function(n){
-  return 1 - Math.sqrt(1 - n * n);
-};
-
-exports.outCirc = function(n){
-  return Math.sqrt(1 - (--n * n));
-};
-
-exports.inOutCirc = function(n){
-  n *= 2
-  if (n < 1) return -0.5 * (Math.sqrt(1 - n * n) - 1);
-  return 0.5 * (Math.sqrt(1 - (n -= 2) * n) + 1);
-};
-
-exports.inBack = function(n){
-  var s = 1.70158;
-  return n * n * (( s + 1 ) * n - s);
-};
-
-exports.outBack = function(n){
-  var s = 1.70158;
-  return --n * n * ((s + 1) * n + s) + 1;
-};
-
-exports.inOutBack = function(n){
-  var s = 1.70158 * 1.525;
-  if ( ( n *= 2 ) < 1 ) return 0.5 * ( n * n * ( ( s + 1 ) * n - s ) );
-  return 0.5 * ( ( n -= 2 ) * n * ( ( s + 1 ) * n + s ) + 2 );
-};
-
-exports.inBounce = function(n){
-  return 1 - exports.outBounce(1 - n);
-};
-
-exports.outBounce = function(n){
-  if ( n < ( 1 / 2.75 ) ) {
-    return 7.5625 * n * n;
-  } else if ( n < ( 2 / 2.75 ) ) {
-    return 7.5625 * ( n -= ( 1.5 / 2.75 ) ) * n + 0.75;
-  } else if ( n < ( 2.5 / 2.75 ) ) {
-    return 7.5625 * ( n -= ( 2.25 / 2.75 ) ) * n + 0.9375;
-  } else {
-    return 7.5625 * ( n -= ( 2.625 / 2.75 ) ) * n + 0.984375;
+module.exports = function(obj, fn){
+  if ('string' == typeof fn) fn = obj[fn];
+  if ('function' != typeof fn) throw new Error('bind() requires a function');
+  var args = [].slice.call(arguments, 2);
+  return function(){
+    return fn.apply(obj, args.concat(slice.call(arguments)));
   }
 };
 
-exports.inOutBounce = function(n){
-  if (n < .5) return exports.inBounce(n * 2) * .5;
-  return exports.outBounce(n * 2 - 1) * .5 + .5;
+});
+require.register("threepointone-twain/index.js", function(exports, require, module){
+//tween.js
+var animloop = require('animloop'),
+    emitter = require('emitter'),
+    each = require('each'),
+    bind = require('bind'),
+    invoke = require('times');
+
+
+// some helper functions
+var isArray = Array.isArray ||
+function(obj) {
+    return toString.call(obj) == '[object Array]';
 };
 
-// aliases
+function extend(obj) {
+    each(Array.prototype.slice.call(arguments, 1), function(source) {
+        for(var prop in source) {
+            obj[prop] = source[prop];
+        }
+    });
+    return obj;
+}
 
-exports['in-quad'] = exports.inQuad;
-exports['out-quad'] = exports.outQuad;
-exports['in-out-quad'] = exports.inOutQuad;
-exports['in-cube'] = exports.inCube;
-exports['out-cube'] = exports.outCube;
-exports['in-out-cube'] = exports.inOutCube;
-exports['in-quart'] = exports.inQuart;
-exports['out-quart'] = exports.outQuart;
-exports['in-out-quart'] = exports.inOutQuart;
-exports['in-quint'] = exports.inQuint;
-exports['out-quint'] = exports.outQuint;
-exports['in-out-quint'] = exports.inOutQuint;
-exports['in-sine'] = exports.inSine;
-exports['out-sine'] = exports.outSine;
-exports['in-out-sine'] = exports.inOutSine;
-exports['in-expo'] = exports.inExpo;
-exports['out-expo'] = exports.outExpo;
-exports['in-out-expo'] = exports.inOutExpo;
-exports['in-circ'] = exports.inCirc;
-exports['out-circ'] = exports.outCirc;
-exports['in-out-circ'] = exports.inOutCirc;
-exports['in-back'] = exports.inBack;
-exports['out-back'] = exports.outBack;
-exports['in-out-back'] = exports.inOutBack;
-exports['in-bounce'] = exports.inBounce;
-exports['out-bounce'] = exports.outBounce;
-exports['in-out-bounce'] = exports.inOutBounce;
+function isValue(v) {
+    return v != null; // matches undefined and null
+}
 
-});
-require.register("component-tween/index.js", function(exports, require, module){
+function map(o, f) {
+    f = f ||
+    function(i) {
+        return i
+    };
 
-/**
- * Module dependencies.
- */
+    var arr = [];
+    each(o, function(v) {
+        arr.push(f(v));
+    });
+    return arr;
+}
 
-var Emitter = require('emitter')
-  , ease = require('ease');
 
-/**
- * Expose `Tween`.
- */
+// defaults
+var defaults = {
+    threshold: 0.2,
+    // used for snapping, since the default algo doesn't
+    multiplier: 0.15 / 16,
+    // fraction to moveby per frame * fps
+    acceleration: -2.5 / 1000,
+    // rate of deceleration (used for inertia calculations)
+    maxDisplacement: 500 // upper limit on inertial movement
+};
 
-module.exports = Tween;
 
-/**
- * Initialize a new `Tween` with `obj`.
- *
- * @param {Object|Array} obj
- * @api public
- */
+// meat and potatoes
 
 function Tween(obj) {
-  if (!(this instanceof Tween)) return new Tween(obj);
-  this._from = obj;
-  this.ease('linear');
-  this.duration(500);
+    if(!(this instanceof Tween)) return new Tween(obj);
+
+    obj = obj || {};
+
+    var t = this;
+
+    each(defaults, function(val, key) {
+        t[key] = isValue(obj[key]) ? obj[key] : val;
+    });
+
+
+    t.step = bind(t, t.step);
+
+    //tracking vars
+    this.running = false;
+    this.velocity = 0;
 }
 
-/**
- * Mixin emitter.
- */
+emitter(Tween.prototype);
 
-Emitter(Tween.prototype);
 
-/**
- * Reset the tween.
- *
- * @api public
- */
+extend(Tween.prototype, {
+    from: function(from) {
+        this._from = this._curr = from;
+    },
+    to: function(to) {
+        if(!this._from) {
+            this.from(to);
+        }
+        this._to = to;
+    },
+    step: function() {
+        var now = new Date().getTime();
+        var period = now - this.time;
+        var fraction = Math.min(this.multiplier * period, 1);
+        var delta = fraction * (this._to - this._curr);
+        var value = this._curr + delta;
 
-Tween.prototype.reset = function(){
-  this.isArray = Array.isArray(this._from);
-  this._curr = clone(this._from);
-  this._done = false;
-  this._start = Date.now();
-  return this;
-};
+        if(Math.abs(this._to - value) < this.threshold) {
+            delta = this._to - this._curr;
+            this._curr = value = this._to;
+            fraction = 1;
+            this.emit('bullseye')
 
-/**
- * Tween to `obj` and reset internal state.
- *
- *    tween.to({ x: 50, y: 100 })
- *
- * @param {Object|Array} obj
- * @return {Tween} self
- * @api public
- */
+        } else {
+            this._curr = value;
+        }
 
-Tween.prototype.to = function(obj){
-  this.reset();
-  this._to = obj;
-  return this;
-};
+        this.velocity = delta / period;
+        this.time = now;
 
-/**
- * Set duration to `ms` [500].
- *
- * @param {Number} ms
- * @return {Tween} self
- * @api public
- */
+        this.emit('step', {
+            time: this.time,
+            period: period,
+            fraction: fraction,
+            delta: delta,
+            value: value
+        });
 
-Tween.prototype.duration = function(ms){
-  this._duration = ms;
-  this._end = this._start + this._duration;
-  return this;
-};
+        return this;
 
-/**
- * Set easing function to `fn`.
- *
- *    tween.ease('in-out-sine')
- *
- * @param {String|Function} fn
- * @return {Tween}
- * @api public
- */
+    },
+    start: function() {
+        if(!this.running) {
+            this.running = true;
+            this.startTime = this.time = new Date().getTime();
+            animloop.on('beforedraw', this.step);
 
-Tween.prototype.ease = function(fn){
-  fn = 'function' == typeof fn ? fn : ease[fn];
-  if (!fn) throw new TypeError('invalid easing function');
-  this._ease = fn;
-  return this;
-};
+            if(!animloop.running) {
+                animloop.start();
+            }
 
-/**
- * Perform a step.
- *
- * @return {Tween} self
- * @api private
- */
+            this.emit('start');
+        }
+        return this;
+    },
+    stop: function() {
+        this.running = false;
+        animloop.off(this.step);
+        this.emit('stop');
+        return this;
+    },
 
-Tween.prototype.step = function(){
-  if (this._done) return;
-
-  // duration
-  var duration = this._duration;
-  var end = this._end;
-  var now = Date.now();
-  var delta = now - this._start;
-  var done = delta >= duration;
-
-  // complete
-  if (done) {
-    this._from = this._curr;
-    this._done = true;
-    this.emit('end')
-    return;
-  }
-
-  // tween
-  var from = this._from;
-  var to = this._to;
-  var curr = this._curr;
-  var fn = this._ease;
-  var p = (now - this._start) / duration;
-  var n = fn(p);
-
-  // array
-  if (this.isArray) {
-    for (var i = 0; i < from.length; ++i) {
-      curr[i] = from[i] + (to[i] - from[i]) * n;
+    // convenience function to calculate inertial target at a given point
+    // todo - calculate rolling average, instead of this._curr directly
+    inertialTarget: function(acceleration, maxDisplacement) {
+        var displacement = Math.min(Math.pow(this.velocity, 2) / (-2 * (acceleration || this.acceleration)), maxDisplacement || this.maxDisplacement);
+        return(this._curr + (displacement * (this.velocity > 0 ? 1 : -1)));
     }
 
-    this._update(curr);
-    return this;
-  }
+});
 
-  // objech
-  for (var k in from) {
-    curr[k] = from[k] + (to[k] - from[k]) * n;
-  }
 
-  this._update(curr);
-  return this;
-};
+// Twain.js
 
-/**
- * Set update function to `fn` or
- * when no argument is given this performs
- * a "step".
- *
- * @param {Function} fn
- * @return {Tween} self
- * @api public
- */
+function Twain(obj) {
+    if(!(this instanceof Twain)) return new Twain(obj);
+    this.config = obj;
+    this.tweens = {};
 
-Tween.prototype.update = function(fn){
-  if (0 == arguments.length) return this.step();
-  this._update = fn;
-  return this;
-};
-
-/**
- * Clone `obj`.
- *
- * @api private
- */
-
-function clone(obj) {
-  if (Array.isArray(obj)) return obj.slice();
-  var ret = {};
-  for (var key in obj) ret[key] = obj[key];
-  return ret;
+    this.running = true; // this is not dependable
 }
+
+emitter(Twain.prototype);
+
+extend(Twain.prototype, {
+    // convenience to get a tween for a prop
+    $t: function(prop, opts) {
+        var t = this;
+        if(this.tweens[prop]) {
+            return this.tweens[prop];
+        }
+
+        var tween = this.tweens[prop] = Tween(opts || this.config);
+        tween.on('step', function(step) {
+            t.emit('step', extend({}, step, {
+                prop: prop
+            }));
+        });
+
+        if(this.running) tween.start();
+
+        return tween;
+    },
+    from: function(from) {
+        var t = this;
+        each(from, function(val, prop) {
+            t.$t(prop).from(val);
+        });
+        return this;
+    },
+
+    to: function(to) {
+        var t = this;
+        each(to, function(val, prop) {
+            t.$t(prop).to(val);
+        });
+        return this;
+    },
+    start: function(prop) {
+        // convenience to start off all/one tweens
+        this.running = true;
+        invoke(prop ? [this.$t(prop)] : map(this.tweens), 'start');
+        return this;
+
+    },
+    stop: function(prop) {
+        // convenience to stop all/one tweens
+        this.running = false;
+        invoke(prop ? [this.$t(prop)] : map(this.tweens), 'stop');
+        return this;
+
+    }
+});
+
+Twain.Tween = Tween;
+
+module.exports = Twain;
 });
 require.register("cssforthesoul/public/javascripts/index.js", function(exports, require, module){
-//simple to just export from here
+var feedback = require('./feedback.js');
+feedback[0].fn();
 
-module.exports = {
-    tween: require('tween')
-};
+feedback[1].fn();
+
+feedback[2].fn();
 });
-require.alias("component-tween/index.js", "cssforthesoul/deps/tween/index.js");
-require.alias("component-emitter/index.js", "component-tween/deps/emitter/index.js");
+require.register("cssforthesoul/public/javascripts/feedback.js", function(exports, require, module){
+var twain = require('twain');
 
-require.alias("component-ease/index.js", "component-tween/deps/ease/index.js");
+// assume jquery lives globally
+
+
+function wait(time, callback) {
+    setTimeout(callback, time);
+};
+
+module.exports = [{
+    trigger: 0,
+    fn: function(done) {
+        setTimeout(function() {
+            $('.fb-1 .arrow').css({
+                opacity: 0
+            }).show().animate({
+                opacity: 1
+            }, 300, function() {
+                $('.fb-1 .needs-logo').css({
+                    opacity: 0
+                }).show().animate({
+                    opacity: 1
+                }, 300, function() {
+                    wait(1000, function() {
+                        $('.hero .hasgeek-logo').addClass('needed-logo');
+                        $('.hero .txt').animate({
+                            'margin-left': -108
+                        }, 400, function() {
+                            wait(500, function() {
+                                $('.fb-2 .arrow').css({
+                                    opacity: 0
+                                }).show().animate({
+                                    opacity: 1
+                                }, 300, function() {
+                                    $('.fb-2 .not-enough-pop').css({
+                                        opacity: 0
+                                    }).show().animate({
+                                        opacity: 1
+                                    }, 300, function() {
+                                        wait(300, function() {
+                                            $('.hero .title').addClass('pop');
+                                            done && done();
+                                        });
+                                    });
+                                });
+                            });
+                        });
+                    });
+                });
+            });
+        }, 1000);
+
+
+
+    },
+
+}, {
+    trigger: 340,
+    fn: function(done) {
+        var pic = $('.speaker-pic img');
+        var comments = $('.fb-3 .comment');
+        wait(5000, function() {
+            $(comments[0]).css({
+                opacity: 0
+            }).show().animate({
+                opacity: 1
+            }, 300, function() { // too pretentious
+                wait(400, function() {
+                    pic.css({
+                        'border-radius': 0,
+                        'border-width': 0
+                    });
+                });
+
+                wait(1000, function() {
+                    $(comments[1]).css({
+                        opacity: 0
+                    }).show().animate({
+                        opacity: 1
+                    }, 300, function() { // web 20
+                        wait(400, function() {
+                            pic.addClass('avatar-3d');
+                        });
+
+                        wait(1000, function() {
+                            $(comments[2]).css({
+                                opacity: 0
+                            }).show().animate({
+                                opacity: 1
+                            }, 300, function() { // rounder
+                                wait(400, function() {
+                                    pic.removeClass('avatar-3d');
+                                    pic.css({
+                                        'border-radius': 5,
+                                        'border-width': 0
+                                    });
+                                });
+
+
+                                wait(1000, function() {
+                                    $(comments[3]).css({
+                                        opacity: 0
+                                    }).show().animate({
+                                        opacity: 1
+                                    }, 300, function() { // ROUNDER
+                                        wait(200, function() {
+                                            pic.css({
+                                                'border-radius': 90,
+                                                'border-width': 5
+                                            });
+                                        });
+
+                                        wait(800, function() {
+                                            $(comments[4]).css({
+                                                opacity: 0
+                                            }).show().animate({
+                                                opacity: 1
+                                            }, 300, done); // dammit britta
+                                        });
+                                    });
+                                });
+
+                            });
+
+                        });
+                    });
+                });
+            });
+        });
+
+    }
+}, {
+    trigger: 700,
+    fn: function(done) {
+        // performance graph
+        var graph = $('.performance .bar-graph');
+        var colors = ['#2db548', '#c62db6', '#d6ad42', '#1b98d6', '#d6133d'];
+        
+        for(var i = 0; i < 5; i++) {
+            var el = $('<div class="bar"/>');
+            el.css({
+                width: Math.random() * 100,
+                top: i * 10
+            });
+            el.get(0).style.backgroundColor = colors[i];
+            graph.append(el);
+        }
+
+        $('.bar-graph .bar').each(function(i, el){
+            var tween = twain();
+            tween.on('step', function(step){
+                el.style.width = step.value + 'px';
+            });
+            setInterval(function(){
+                tween.to({
+                    width: Math.random()*100
+                });
+            }, 300 + Math.random()*500)
+        });
+        
+
+    }
+
+}];
+});
+require.alias("threepointone-twain/index.js", "cssforthesoul/deps/twain/index.js");
+require.alias("threepointone-animloop/index.js", "threepointone-twain/deps/animloop/index.js");
+require.alias("threepointone-raf/index.js", "threepointone-animloop/deps/raf/index.js");
+
+require.alias("component-emitter/index.js", "threepointone-animloop/deps/emitter/index.js");
+
+require.alias("manuelstofer-each/index.js", "threepointone-twain/deps/each/index.js");
+
+require.alias("threepointone-times/index.js", "threepointone-twain/deps/times/index.js");
+
+require.alias("component-emitter/index.js", "threepointone-twain/deps/emitter/index.js");
+
+require.alias("component-bind/index.js", "threepointone-twain/deps/bind/index.js");
 
 require.alias("cssforthesoul/public/javascripts/index.js", "cssforthesoul/index.js");
 

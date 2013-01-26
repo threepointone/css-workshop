@@ -1,5 +1,6 @@
-//simple to just export from here
+var feedback = require('./feedback.js');
+feedback[0].fn();
 
-module.exports = {
-    tween: require('tween')
-};
+feedback[1].fn();
+
+feedback[2].fn();

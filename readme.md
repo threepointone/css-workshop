@@ -10,6 +10,7 @@ Then run the app
 ```
 npm start
 ```
+and open up `http://localhost:3000`
 
 The content for this microsite has been written in [jade](http://jade-lang.com) and [less](http://lesscss.org). Layout and partials can be found under `views`. 
 
