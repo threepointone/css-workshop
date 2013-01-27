@@ -157,13 +157,17 @@ strong {
   width: 960px;
   margin: 20px auto;
 }
+.requirements ul li {
+  list-style-type: circle;
+}
 .schedule .unit,
 .blurb,
 .hero,
 .speaker,
 .hasgeek,
 .venue,
-.register {
+.register,
+.requirements {
   padding: 40px;
   margin-bottom: 40px;
   position: relative;
@@ -251,6 +255,22 @@ strong {
   background-image: url(../images/coffee-stain.jpg);
   background-repeat: no-repeat;
   background-position: right 500px;
+}
+.schedule-scribble {
+  position: absolute;
+  top: -20px;
+  left: -100px;
+}
+img.grid-columns {
+  position: absolute;
+  top: 0;
+  right: 0;
+  -moz-opacity: 0.3;
+  -khtml-opacity: 0.3;
+  -webkit-opacity: 0.3;
+  opacity: 0.3;
+  -ms-filter: progid:DXImageTransform.Microsoft.Alpha(opacity=30);
+  filter: alpha(opacity=30);
 }
 .schedule .title {
   text-align: center;

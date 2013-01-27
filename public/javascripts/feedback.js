@@ -136,7 +136,9 @@ module.exports = [{
         var stretcher = $('.everywhere .stretcher').get(0);
 
         (function(){
-            var t = window.ttt = twain();
+            var t = twain({
+                multiplier: 0.08/16
+            });
             var toggle = true;
             t.on('step', function(step){
                 stretcher.style.width = step.value + '%';
@@ -151,7 +153,7 @@ module.exports = [{
                 toggle= true;
                 t.to({width:100})                
 
-            },1000);
+            },2000);
 
         })();
 
