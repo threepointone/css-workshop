@@ -67,15 +67,11 @@ strong{
 
         h1{
             .transition(0.6s, cubic-bezier(1.000, -0.530, 0.405, 1.425));
+            line-height:80px;
             font-size:72px;
             color:red; 
         }
-
-
-
     }
-
-
 
     .hasgeek-logo{
         width:0;
@@ -189,11 +185,29 @@ strong{
     }
 }
 
+.everywhere .stretcher{
+    display: block;
+    position: relative;
+    margin:0 auto;
+    height:7px;
+    border-left: 1px solid red;
+    border-right: 1px solid red;
+
+    &:after{
+        position:absolute;
+        width:100%;
+        border-top:1px solid red;
+        top:3px;
+        height:1px;
+        content: ' ';
+    }
+}
+
 .performance .bar-graph{
     position: absolute;
     width:120px;
-    top:50px;
-    left:-120px;
+    top:32px;
+    left:-95px;
 
     .bar{
         height:4px;

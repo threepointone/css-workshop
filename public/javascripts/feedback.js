@@ -10,6 +10,7 @@ function wait(time, callback) {
 module.exports = [{
     trigger: 0,
     fn: function(done) {
+
         setTimeout(function() {
             $('.fb-1 .arrow').css({
                 opacity: 0
@@ -57,6 +58,7 @@ module.exports = [{
 }, {
     trigger: 340,
     fn: function(done) {
+        return;
         var pic = $('.speaker-pic img');
         var comments = $('.fb-3 .comment');
         wait(5000, function() {
@@ -67,8 +69,7 @@ module.exports = [{
             }, 300, function() { // too pretentious
                 wait(400, function() {
                     pic.css({
-                        'border-radius': 0,
-                        'border-width': 0
+                        'border-radius': 0
                     });
                 });
 
@@ -91,8 +92,7 @@ module.exports = [{
                                 wait(400, function() {
                                     pic.removeClass('avatar-3d');
                                     pic.css({
-                                        'border-radius': 5,
-                                        'border-width': 0
+                                        'border-radius': 10
                                     });
                                 });
 
@@ -105,8 +105,7 @@ module.exports = [{
                                     }, 300, function() { // ROUNDER
                                         wait(200, function() {
                                             pic.css({
-                                                'border-radius': 90,
-                                                'border-width': 5
+                                                'border-radius': 90
                                             });
                                         });
 
@@ -132,6 +131,30 @@ module.exports = [{
 }, {
     trigger: 700,
     fn: function(done) {
+
+
+        var stretcher = $('.everywhere .stretcher').get(0);
+
+        (function(){
+            var t = window.ttt = twain();
+            var toggle = true;
+            t.on('step', function(step){
+                stretcher.style.width = step.value + '%';
+            });
+
+            setInterval(function(){
+                if(toggle==true){
+                    toggle= false;
+                    t.to({width:30})
+                    return;
+                }
+                toggle= true;
+                t.to({width:100})                
+
+            },1000);
+
+        })();
+
         // performance graph
         var graph = $('.performance .bar-graph');
         var colors = ['#2db548', '#c62db6', '#d6ad42', '#1b98d6', '#d6133d'];
@@ -161,4 +184,9 @@ module.exports = [{
 
     }
 
+},{
+    trigger: null,
+    fn: function(done){
+
+    }
 }];

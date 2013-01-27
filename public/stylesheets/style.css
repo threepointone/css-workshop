@@ -179,6 +179,7 @@ strong {
   -moz-transition: all 0.6s cubic-bezier(1, -0.53, 0.405, 1.425);
   -o-transition: all 0.6s cubic-bezier(1, -0.53, 0.405, 1.425);
   transition: all 0.6s cubic-bezier(1, -0.53, 0.405, 1.425);
+  line-height: 80px;
   font-size: 72px;
   color: red;
 }
@@ -283,11 +284,27 @@ strong {
 .fb-3 .green .user {
   color: #2db548;
 }
+.everywhere .stretcher {
+  display: block;
+  position: relative;
+  margin: 0 auto;
+  height: 7px;
+  border-left: 1px solid red;
+  border-right: 1px solid red;
+}
+.everywhere .stretcher:after {
+  position: absolute;
+  width: 100%;
+  border-top: 1px solid red;
+  top: 3px;
+  height: 1px;
+  content: ' ';
+}
 .performance .bar-graph {
   position: absolute;
   width: 120px;
-  top: 50px;
-  left: -120px;
+  top: 32px;
+  left: -95px;
 }
 .performance .bar-graph .bar {
   height: 4px;
