@@ -134,6 +134,31 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
   -o-animation-name: wobble;
   animation-name: wobble;
 }
+.hole-cnt {
+  width: 246px;
+  height: 205px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 1;
+  background-color: black;
+  overflow: hidden;
+}
+.hole-cnt .hole {
+  position: relative;
+}
+.hole-cnt .nucleus {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+}
+.hole-cnt .nucleus .electron {
+  display: block;
+  position: absolute;
+  height: 2px;
+  width: 2px;
+  background-color: white;
+}
 body {
   font-family: "PT Serif", sans-serif;
   font-size: 16px;
@@ -168,6 +193,7 @@ strong {
 .venue,
 .register,
 .requirements {
+  z-index: 2;
   padding: 40px;
   margin-bottom: 40px;
   position: relative;

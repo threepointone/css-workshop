@@ -67,7 +67,17 @@
                 | j
 
 
-    h2.title Day Two
+    h2.title(style='position:relative') 
+        div(style='z-index:5; position:relative;') Day Two
+        .hole-cnt            
+            .nucleus
+                .electron
+                .electron
+                .electron
+                .electron
+                .electron
+                .electron
+            img(class='hole',src='images/hole.png')                
 
     .unit.animations
         
@@ -106,6 +116,7 @@
             upcoming changes in the spec, and how we can leverage some of the new HTML5/CSS3 
             features in current applications. This includes CSS filters, shims/polyfills, 
             and degradation strategies.
+        
 
     .unit.recap
         h3 Finale

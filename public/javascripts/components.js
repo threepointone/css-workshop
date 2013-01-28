@@ -204,63 +204,6 @@ require.relative = function(parent) {
 
   return localRequire;
 };
-require.register("threepointone-raf/index.js", function(exports, require, module){
-(function(){
-
-    var root = this;
-    module.exports = root.requestAnimationFrame || 
-        root.webkitRequestAnimationFrame || 
-        root.mozRequestAnimationFrame || 
-        root.oRequestAnimationFrame || 
-        root.msRequestAnimationFrame || 
-        fallback;
-
-var prev = new Date().getTime();
-
-function fallback(fn) {
-    var curr = new Date().getTime();
-    var ms = Math.max(0, 16 - (curr - prev));
-    setTimeout(fn, ms);
-    prev = curr;
-}    
-}).call(this);
-
-
-
-});
-require.register("threepointone-animloop/index.js", function(exports, require, module){
-var raf = require('raf'),
-    emitter = require('emitter');
-
-var running = false;
-
-var EVT = 'beforedraw';
-
-var AnimLoop = {
-    start: function() {
-        if(!running){
-            running = true;
-            runloop();
-        }
-    },
-    stop: function(){
-        running = false;
-    }
-};
-
-emitter(AnimLoop);
-
-module.exports = AnimLoop;
-
-function runloop(){
-    if(running){
-        AnimLoop.emit(EVT);
-        raf(runloop);
-    }
-}
-
-
-});
 require.register("manuelstofer-each/index.js", function(exports, require, module){
 "use strict";
 
@@ -714,6 +657,63 @@ Twain.Tween = Tween;
 
 module.exports = Twain;
 });
+require.register("threepointone-raf/index.js", function(exports, require, module){
+(function(){
+
+    var root = this;
+    module.exports = root.requestAnimationFrame || 
+        root.webkitRequestAnimationFrame || 
+        root.mozRequestAnimationFrame || 
+        root.oRequestAnimationFrame || 
+        root.msRequestAnimationFrame || 
+        fallback;
+
+var prev = new Date().getTime();
+
+function fallback(fn) {
+    var curr = new Date().getTime();
+    var ms = Math.max(0, 16 - (curr - prev));
+    setTimeout(fn, ms);
+    prev = curr;
+}    
+}).call(this);
+
+
+
+});
+require.register("threepointone-animloop/index.js", function(exports, require, module){
+var raf = require('raf'),
+    emitter = require('emitter');
+
+var running = false;
+
+var EVT = 'beforedraw';
+
+var AnimLoop = {
+    start: function() {
+        if(!running){
+            running = true;
+            runloop();
+        }
+    },
+    stop: function(){
+        running = false;
+    }
+};
+
+emitter(AnimLoop);
+
+module.exports = AnimLoop;
+
+function runloop(){
+    if(running){
+        AnimLoop.emit(EVT);
+        raf(runloop);
+    }
+}
+
+
+});
 require.register("cssforthesoul/public/javascripts/index.js", function(exports, require, module){
 var feedback = require('./feedback.js');
 feedback[0].fn();
@@ -721,12 +721,14 @@ feedback[0].fn();
 feedback[1].fn();
 
 feedback[2].fn();
+
+feedback[3].fn();
 });
 require.register("cssforthesoul/public/javascripts/feedback.js", function(exports, require, module){
-var twain = require('twain');
+var twain = require('twain'),
+    animloop = require('animloop');
 
 // assume jquery lives globally
-
 
 function wait(time, callback) {
     setTimeout(callback, time);
@@ -860,32 +862,36 @@ module.exports = [{
 
         var stretcher = $('.everywhere .stretcher').get(0);
 
-        (function(){
+        (function() {
             var t = twain({
-                multiplier: 0.08/16
+                multiplier: 0.08 / 16
             });
             var toggle = true;
-            t.on('step', function(step){
+            t.on('step', function(step) {
                 stretcher.style.width = step.value + '%';
             });
 
-            setInterval(function(){
-                if(toggle==true){
-                    toggle= false;
-                    t.to({width:30})
+            setInterval(function() {
+                if(toggle == true) {
+                    toggle = false;
+                    t.to({
+                        width: 30
+                    })
                     return;
                 }
-                toggle= true;
-                t.to({width:100})                
+                toggle = true;
+                t.to({
+                    width: 100
+                })
 
-            },2000);
+            }, 2000);
 
         })();
 
         // performance graph
         var graph = $('.performance .bar-graph');
         var colors = ['#2db548', '#c62db6', '#d6ad42', '#1b98d6', '#d6133d'];
-        
+
         for(var i = 0; i < 5; i++) {
             var el = $('<div class="bar"/>');
             el.css({
@@ -896,24 +902,61 @@ module.exports = [{
             graph.append(el);
         }
 
-        $('.bar-graph .bar').each(function(i, el){
+        $('.bar-graph .bar').each(function(i, el) {
             var tween = twain();
-            tween.on('step', function(step){
+            tween.on('step', function(step) {
                 el.style.width = step.value + 'px';
             });
-            setInterval(function(){
+            setInterval(function() {
                 tween.to({
-                    width: Math.random()*100
+                    width: Math.random() * 100
                 });
-            }, 300 + Math.random()*500)
+            }, 300 + Math.random() * 500)
         });
-        
+
 
     }
 
-},{
+}, {
     trigger: null,
-    fn: function(done){
+    fn: function(done) {
+        var hole = $('.hole-cnt');
+        var width = hole.width();
+        var height = hole.height();
+        var nucleus = $('.hole-cnt .nucleus');
+        var electrons = nucleus.find('.electron');
+
+        electrons.each(function(i,el){
+            $(el).css({
+                transform:'rotate(' + (i*30) + 'deg)'
+            });
+        });
+
+        animloop.on('beforedraw', function() {
+            var time = new Date().getTime();
+
+            electrons.each(function(i, el) {
+                $(el).css({
+                    transform: 'rotate(' + (i*30) + 'deg) translate(0, ' + (20*Math.sin((time + i*20)/100)) + 'px)'
+                });
+            });
+        });
+
+
+        var tween = twain().on('step', function(step) {
+            nucleus.css(step.prop, step.value);
+        });
+
+
+        $(document.body).on('mousemove', function(e) {
+            var _left = e.pageX - hole.offset().left;
+            var _top = e.pageY - hole.offset().top;
+            tween.to({
+                top: _top,
+                left: _left
+            });
+
+        });
 
     }
 }];
@@ -931,6 +974,11 @@ require.alias("threepointone-times/index.js", "threepointone-twain/deps/times/in
 require.alias("component-emitter/index.js", "threepointone-twain/deps/emitter/index.js");
 
 require.alias("component-bind/index.js", "threepointone-twain/deps/bind/index.js");
+
+require.alias("threepointone-animloop/index.js", "cssforthesoul/deps/animloop/index.js");
+require.alias("threepointone-raf/index.js", "threepointone-animloop/deps/raf/index.js");
+
+require.alias("component-emitter/index.js", "threepointone-animloop/deps/emitter/index.js");
 
 require.alias("cssforthesoul/public/javascripts/index.js", "cssforthesoul/index.js");
 

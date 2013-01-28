@@ -94,7 +94,19 @@
             <div class="post-it">"The 3 Ds", dammit. <br>j</div>
           </div>
         </div>
-        <h2 class="title">Day Two</h2>
+        <h2 style="position:relative" class="title"> 
+          <div style="z-index:5; position:relative;">Day Two</div>
+          <div class="hole-cnt">           
+            <div class="nucleus">
+              <div class="electron"></div>
+              <div class="electron"></div>
+              <div class="electron"></div>
+              <div class="electron"></div>
+              <div class="electron"></div>
+              <div class="electron"></div>
+            </div><img src="images/hole.png" class="hole">
+          </div>
+        </h2>
         <div class="unit animations">
           <h3>Animate!</h3>
           <ul>
@@ -124,6 +136,7 @@
             upcoming changes in the spec, and how we can leverage some of the new HTML5/CSS3 
             features in current applications. This includes CSS filters, shims/polyfills, 
             and degradation strategies.
+            
             
           </p>
         </div>
@@ -169,6 +182,10 @@
     </div>
     <script src="javascripts/components.js"></script>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
-    <script>var ws = require('cssforthesoul');</script>
+    <script>
+      $(function(){
+          var ws = require('cssforthesoul');    
+      });
+    </script>
   </body>
 </html>

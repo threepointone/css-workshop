@@ -5,7 +5,8 @@
   "version": "0.0.1",
   "keywords": [],
   "dependencies": {
-    "threepointone/twain": "*"
+    "threepointone/twain": "*",
+    "threepointone/animloop": "*"
   },
   "main": "public/javascripts/index.js",
   "scripts": [
