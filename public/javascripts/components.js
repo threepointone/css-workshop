@@ -926,12 +926,7 @@ module.exports = [{
         var nucleus = $('.hole-cnt .nucleus');
         var electrons = nucleus.find('.electron');
 
-        electrons.each(function(i,el){
-            $(el).css({
-                transform:'rotate(' + (i*30) + 'deg)'
-            });
-        });
-
+ 
         animloop.on('beforedraw', function() {
             var time = new Date().getTime();
 
