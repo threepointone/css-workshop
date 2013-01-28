@@ -90,19 +90,20 @@ module.exports = [{
                                 opacity: 1
                             }, 300, function() { // rounder
                                 wait(400, function() {
-                                    pic.removeClass('avatar-3d');
+
                                     pic.css({
-                                        'border-radius': 10
+                                        'border-radius': 30
                                     });
                                 });
 
 
-                                wait(1000, function() {
+                                wait(1400, function() {
                                     $(comments[3]).css({
                                         opacity: 0
                                     }).show().animate({
                                         opacity: 1
                                     }, 300, function() { // ROUNDER
+                                        pic.removeClass('avatar-3d');
                                         wait(200, function() {
                                             pic.css({
                                                 'border-radius': 90
@@ -199,28 +200,34 @@ module.exports = [{
         var nucleus = $('.hole-cnt .nucleus');
         var electrons = nucleus.find('.electron');
 
- 
+
         animloop.on('beforedraw', function() {
             var time = new Date().getTime();
 
             electrons.each(function(i, el) {
                 $(el).css({
-                    transform: 'rotate(' + (i*30) + 'deg) translate(0, ' + (20*Math.sin((time + i*20)/100)) + 'px)'
+                    transform: 'rotate(' + (i * 30) + 'deg) translate(0, ' + (20 * Math.sin((time + i * 20) / 100)) + 'px)'
                 });
             });
         });
 
-
-
-        $(document.body).on('mousemove', function(e) {
+        var user = function(e) {
             var _left = e.pageX - hole.offset().left;
             var _top = e.pageY - hole.offset().top;
             nucleus.css({
                 top: _top,
                 left: _left
             });
+        };
 
-        });
+        try {
+            window.addEventListener("touchstart", user);
+        } catch(e) {
+            // touch probably not supported
+        }
+
+
+        $(document.body).on('mousemove', user);
 
     }
 }];
