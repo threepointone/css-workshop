@@ -785,7 +785,7 @@ module.exports = [{
 }, {
     trigger: 340,
     fn: function(done) {
-        return;
+        // return;
         var pic = $('.speaker-pic img');
         var comments = $('.fb-3 .comment');
         wait(5000, function() {
