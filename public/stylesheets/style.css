@@ -387,6 +387,10 @@ img.grid-columns {
 .register h3 {
   padding-left: 20px;
 }
+#map {
+  height: 200px;
+  width: 100%;
+}
 /* Smaller than standard 960 (devices and browsers) */
 @media only screen and (max-width: 959px) {
   .container {
