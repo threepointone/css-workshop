@@ -216,15 +216,11 @@ module.exports = [{
         });
 
 
-        var tween = twain().on('step', function(step) {
-            nucleus.css(step.prop, step.value);
-        });
-
 
         $(document.body).on('mousemove', function(e) {
             var _left = e.pageX - hole.offset().left;
             var _top = e.pageY - hole.offset().top;
-            tween.to({
+            nucleus.css({
                 top: _top,
                 left: _left
             });
