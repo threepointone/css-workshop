@@ -198,6 +198,9 @@ strong {
   padding: 20px;
   position: relative;
 }
+.hero {
+  padding-bottom: 0;
+}
 .hero strong {
   color: #777;
 }
@@ -213,17 +216,17 @@ strong {
   font-size: 72px;
   color: red;
 }
-.hero .hasgeek-logo {
+.hero .hasgeek-presents {
   width: 0;
   height: 0;
 }
-.hero .hasgeek-logo.needed-logo {
+.hero .hasgeek-presents.needed-logo {
   -webkit-transition: all 0.4s linear;
   -moz-transition: all 0.4s linear;
   -o-transition: all 0.4s linear;
   transition: all 0.4s linear;
   width: 100px;
-  height: 75px;
+  height: 83px;
 }
 .fb-1,
 .fb-1 img {
@@ -235,7 +238,7 @@ strong {
 }
 .fb-1 .needs-logo {
   top: 70px;
-  left: -180px;
+  left: -170px;
 }
 .fb-2,
 .fb-2 img {
@@ -369,6 +372,10 @@ img.grid-columns {
   text-shadow: -1px -1px 0px #999999, -2px -2px 0px #888888, -3px -3px 0px #777777, -4px -4px 0px #666666, -5px -5px 0px #555555, -5px -5px 0px #444444, -5px -5px 0px #333333, -5px -5px 5px #222222;
   position: absolute;
   z-index: 100;
+}
+.hasgeek-presents {
+  width: 100px;
+  height: 83px;
 }
 .hasgeek-logo {
   width: 100px;
