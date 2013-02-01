@@ -779,9 +779,10 @@ module.exports = [{
                     opacity: 1
                 }, 300, function() {
                     wait(1000, function() {
-                        $('.hero .hasgeek-logo').addClass('needed-logo');
+                        $('.hero .hasgeek-presents').addClass('needed-logo');
                         $('.hero .txt').animate({
-                            'margin-left': -108
+                            'margin-left': -1000,
+                            'margin-top': -20
                         }, 400, function() {
                             wait(500, function() {
                                 $('.fb-2 .arrow').css({
