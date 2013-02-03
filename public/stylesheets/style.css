@@ -38,94 +38,94 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 /* originally authored by Nick Pettit - https://github.com/nickpettit/glide */
 @-webkit-keyframes wobble {
   0% {
-    -webkit-transform: translateX(0%);
+    -webkit-transform: translatex(0%);
   }
   15% {
-    -webkit-transform: translateX(-25%) rotate(-5deg);
+    -webkit-transform: translatex(-25%) rotate(-5deg);
   }
   30% {
-    -webkit-transform: translateX(20%) rotate(3deg);
+    -webkit-transform: translatex(20%) rotate(3deg);
   }
   45% {
-    -webkit-transform: translateX(-15%) rotate(-3deg);
+    -webkit-transform: translatex(-15%) rotate(-3deg);
   }
   60% {
-    -webkit-transform: translateX(10%) rotate(2deg);
+    -webkit-transform: translatex(10%) rotate(2deg);
   }
   75% {
-    -webkit-transform: translateX(-5%) rotate(-1deg);
+    -webkit-transform: translatex(-5%) rotate(-1deg);
   }
   100% {
-    -webkit-transform: translateX(0%);
+    -webkit-transform: translatex(0%);
   }
 }
 @-moz-keyframes wobble {
   0% {
-    -moz-transform: translateX(0%);
+    -moz-transform: translatex(0%);
   }
   15% {
-    -moz-transform: translateX(-25%) rotate(-5deg);
+    -moz-transform: translatex(-25%) rotate(-5deg);
   }
   30% {
-    -moz-transform: translateX(20%) rotate(3deg);
+    -moz-transform: translatex(20%) rotate(3deg);
   }
   45% {
-    -moz-transform: translateX(-15%) rotate(-3deg);
+    -moz-transform: translatex(-15%) rotate(-3deg);
   }
   60% {
-    -moz-transform: translateX(10%) rotate(2deg);
+    -moz-transform: translatex(10%) rotate(2deg);
   }
   75% {
-    -moz-transform: translateX(-5%) rotate(-1deg);
+    -moz-transform: translatex(-5%) rotate(-1deg);
   }
   100% {
-    -moz-transform: translateX(0%);
+    -moz-transform: translatex(0%);
   }
 }
 @-o-keyframes wobble {
   0% {
-    -o-transform: translateX(0%);
+    -o-transform: translatex(0%);
   }
   15% {
-    -o-transform: translateX(-25%) rotate(-5deg);
+    -o-transform: translatex(-25%) rotate(-5deg);
   }
   30% {
-    -o-transform: translateX(20%) rotate(3deg);
+    -o-transform: translatex(20%) rotate(3deg);
   }
   45% {
-    -o-transform: translateX(-15%) rotate(-3deg);
+    -o-transform: translatex(-15%) rotate(-3deg);
   }
   60% {
-    -o-transform: translateX(10%) rotate(2deg);
+    -o-transform: translatex(10%) rotate(2deg);
   }
   75% {
-    -o-transform: translateX(-5%) rotate(-1deg);
+    -o-transform: translatex(-5%) rotate(-1deg);
   }
   100% {
-    -o-transform: translateX(0%);
+    -o-transform: translatex(0%);
   }
 }
 @keyframes wobble {
   0% {
-    transform: translateX(0%);
+    transform: translatex(0%);
   }
   15% {
-    transform: translateX(-25%) rotate(-5deg);
+    transform: translatex(-25%) rotate(-5deg);
   }
   30% {
-    transform: translateX(20%) rotate(3deg);
+    transform: translatex(20%) rotate(3deg);
   }
   45% {
-    transform: translateX(-15%) rotate(-3deg);
+    transform: translatex(-15%) rotate(-3deg);
   }
   60% {
-    transform: translateX(10%) rotate(2deg);
+    transform: translatex(10%) rotate(2deg);
   }
   75% {
-    transform: translateX(-5%) rotate(-1deg);
+    transform: translatex(-5%) rotate(-1deg);
   }
   100% {
-    transform: translateX(0%);
+    transform: translatex(0%);
   }
 }
 .wobble {
@@ -198,6 +198,9 @@ strong {
   padding: 20px;
   position: relative;
 }
+.hero {
+  padding-bottom: 0;
+}
 .hero strong {
   color: #777;
 }
@@ -213,17 +216,17 @@ strong {
   font-size: 72px;
   color: red;
 }
-.hero .hasgeek-logo {
+.hero .hasgeek-presents {
   width: 0;
   height: 0;
 }
-.hero .hasgeek-logo.needed-logo {
+.hero .hasgeek-presents.needed-logo {
   -webkit-transition: all 0.4s linear;
   -moz-transition: all 0.4s linear;
   -o-transition: all 0.4s linear;
   transition: all 0.4s linear;
   width: 100px;
-  height: 75px;
+  height: 83px;
 }
 .fb-1,
 .fb-1 img {
@@ -235,7 +238,7 @@ strong {
 }
 .fb-1 .needs-logo {
   top: 70px;
-  left: -180px;
+  left: -170px;
 }
 .fb-2,
 .fb-2 img {
@@ -273,10 +276,10 @@ strong {
 }
 .speaker-pic img.avatar-3d {
   background-color: red;
-  -webkit-transform: perspective(600px) rotateY(45deg);
-  -moz-transform: perspective(600px) rotateY(45deg);
-  -o-transform: perspective(600px) rotateY(45deg);
-  transform: perspective(600px) rotateY(45deg);
+  -webkit-transform: perspective(600px) rotatey(45deg);
+  -moz-transform: perspective(600px) rotatey(45deg);
+  -o-transform: perspective(600px) rotatey(45deg);
+  transform: perspective(600px) rotatey(45deg);
 }
 .schedule {
   background-image: url(../images/coffee-stain.jpg);
@@ -363,12 +366,16 @@ img.grid-columns {
 .ddd h3.threed {
   font: 60px/80px SilkscreenNormal;
   line-height: 100px;
-  -webkit-transform: skewY(-26.6deg);
-  -moz-transform: skewY(-26.6deg);
-  -o-transform: skewY(-26.6deg);
+  -webkit-transform: skewy(-26.6deg);
+  -moz-transform: skewy(-26.6deg);
+  -o-transform: skewy(-26.6deg);
   text-shadow: -1px -1px 0px #999999, -2px -2px 0px #888888, -3px -3px 0px #777777, -4px -4px 0px #666666, -5px -5px 0px #555555, -5px -5px 0px #444444, -5px -5px 0px #333333, -5px -5px 5px #222222;
   position: absolute;
   z-index: 100;
+}
+.hasgeek-presents {
+  width: 100px;
+  height: 83px;
 }
 .hasgeek-logo {
   width: 100px;
