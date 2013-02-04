@@ -3,6 +3,7 @@
 <html>
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>CSS Workshop, 16-17 February, Bangalore - HasGeek</title>
     <link href="http://fonts.googleapis.com/css?family=PT+Sans:700|PT+Sans+Narrow:700|PT+Serif" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="stylesheets/skeleton.css">
     <link rel="stylesheet" href="stylesheets/style.css">
@@ -11,7 +12,7 @@
   <body>
     <div class="container">
       <div class="hero">
-        <div class="fb-1"><img src="images/arrow-1.png" style="display:none" class="arrow"><img src="/images/needs-logo.png" style="display:none" class="needs-logo"></div>
+        <div class="fb-1"><img src="images/arrow-1.png" style="display:none" class="arrow"><img src="images/needs-logo.png" style="display:none" class="needs-logo"></div>
         <div class="fb-2"><img src="images/arrow-2.png" style="display:none" class="arrow"><img alt="not-enough-pop" title="not-enough-pop" src="images/not-enough-pop.png" style="display:none" class="not-enough-pop"></div>
         <div class="by">
           <h3> <img src="images/hasgeek-presents.png" class="hasgeek-presents">
@@ -183,6 +184,12 @@
     </div>
     <script src="javascripts/components.js"></script>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+    <script>
+      if (typeof jQuery == 'undefined')
+      {
+          document.write(unescape("%3Cscript src='javascripts/jquery.js' type='text/javascript'%3E%3C/script%3E"));
+      }
+    </script>
     <script src="http://workshop.cartonama.com/_themes/cartonama_workshop_2012/js/leaflet.js"></script>
     <script>
       $(function(){
