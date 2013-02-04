@@ -373,6 +373,10 @@ img.grid-columns {
   position: absolute;
   z-index: 100;
 }
+.hasgeek-presents {
+  width: 100px;
+  height: 83px;
+}
 .hasgeek-logo {
   width: 100px;
   height: 75px;
