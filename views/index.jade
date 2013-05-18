@@ -9,6 +9,7 @@ html
     link(rel='stylesheet', href='stylesheets/style.css')
     link(rel='stylesheet', href='http://workshop.cartonama.com/_themes/cartonama_workshop_2012/css/leaflet.css')
   body
+    #networkbar(data-siteid='workshops')
     .container
         include partials/hero
         include partials/blurb
@@ -28,3 +29,4 @@ html
         $(function(){
             var ws = require('cssforthesoul');    
         });
+    script(src='https://api.hasgeek.com/1/networkbar/networkbar.js')
